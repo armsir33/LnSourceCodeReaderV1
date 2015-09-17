@@ -1,6 +1,9 @@
 package db;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,8 +16,11 @@ public class DBOperation {
 	public DBOperation() {
 		final String PERSISTENCE_UNIT_NAME = "APIEntity";
 		EntityManagerFactory factory;
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		Map<String, String> pmap = new HashMap<String, String>();
+	    pmap.put("javax.persistence.jdbc.url", "jdbc:derby:"+System.getProperty("user.home") + File.separator + "LnSourceCodeReader"+File.separator+"Derby;create=true");
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, pmap);
 		em = factory.createEntityManager();
+		
 	}
 
 	public EntityManager getEm() {
@@ -67,6 +73,7 @@ public class DBOperation {
 	
 	public void list() {
 		Query q = em.createQuery("select t from APIEntity t");
+		@SuppressWarnings("unchecked")
 		List<APIEntity> apiList = q.getResultList();
 		for (APIEntity api : apiList) {
 			System.out.println(api);

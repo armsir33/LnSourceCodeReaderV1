@@ -28,8 +28,6 @@ public class FileProcesser {
 					isImpl = true;
 					int lastSpaceIndex = newLineStr.lastIndexOf(" ");
 					api = newLineStr.substring(lastSpaceIndex + 1, newLineStr.length() - 2);
-					// api
-					// System.out.println("function " + api);
 				} else {
 					if (isImpl) {
 						// impl
@@ -44,6 +42,10 @@ public class FileProcesser {
 					}
 				}
 			}
+			
+			// clear up
+			br.close();
+			fr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,17 +3,10 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 import file.FileProcesser;
-import utils.PropertyUtil;
 
 public class Main {
 	private FileProcesser fp;
 	public static String path;
-	private String VRC;
-	private String PACKAGE;
-	private String MODULE;
-	private String ROOT_FILE;
-	private String TYPE;
-
 	private static Scanner scanner;
 
 	public Main() {
@@ -23,16 +16,18 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		initAndSetupDBFolder();
+		
 		new Main();
-		// FileProcesser fp = new FileProcesser();
-		// fp.process();
-		// fp.list();
-		// fp.clear();
-		// System.out.println(fp.get("delete.related.data"));
-		// System.out.println(fp.get("get.bp.name"));
-		// fp.close();
 	}
-
+	
+	private static void initAndSetupDBFolder() {
+		File path = new File(System.getProperty("user.home")+File.separator + "LnSourceCodeReader");
+		if(!path.exists()) {
+			path.mkdirs();
+		}
+	}
+	
 	private void load() {
 		boolean quit = false;
 		String isExist;
@@ -99,27 +94,33 @@ public class Main {
 		fp.clear();
 	}
 
+//	private String inputVariable() {
+//		System.out.println("Input VRC [Example: B61C_a_kal7]");
+//		VRC = scanner.nextLine();
+//		System.out.println("Input Package [Example: ts]");
+//		PACKAGE = scanner.nextLine();
+//		System.out.println("Input Module [Example: soc]");
+//		MODULE = scanner.nextLine();
+//		System.out.println("Input Root File [Example: psoc91010]");
+//		ROOT_FILE = scanner.nextLine();
+//		do {
+//			System.out.println("Input File Type [Example: REPORT(R) | PROGRAM(P)]");
+//			TYPE = scanner.nextLine();
+//		} while (!TYPE.equals("REPORT") && !TYPE.equals("R") && !TYPE.equals("PROGRAM") && !TYPE.equals("P"));
+//
+//		PropertyUtil pptUtil = new PropertyUtil();
+//		String bsePath = pptUtil.getValidProperty("BSE_PATH");
+//		if (TYPE.equals("P")) {
+//			path = bsePath + "/application/" + PACKAGE + VRC + "/p" + PACKAGE + MODULE + "/" + ROOT_FILE;
+//		} else {
+//			path = bsePath + "/application/" + PACKAGE + VRC + "/r" + PACKAGE + MODULE + "/" + ROOT_FILE;
+//		}
+//		return path;
+//	}
+	
 	private String inputVariable() {
-		System.out.println("Input VRC [Example: B61C_a_kal7]");
-		VRC = scanner.nextLine();
-		System.out.println("Input Package [Example: ts]");
-		PACKAGE = scanner.nextLine();
-		System.out.println("Input Module [Example: soc]");
-		MODULE = scanner.nextLine();
-		System.out.println("Input Root File [Example: psoc91010]");
-		ROOT_FILE = scanner.nextLine();
-		do {
-			System.out.println("Input File Type [Example: REPORT(R) | PROGRAM(P)]");
-			TYPE = scanner.nextLine();
-		} while (!TYPE.equals("REPORT") && !TYPE.equals("R") && !TYPE.equals("PROGRAM") && !TYPE.equals("P"));
-
-		PropertyUtil pptUtil = new PropertyUtil();
-		String bsePath = pptUtil.getValidProperty("BSE_PATH");
-		if (TYPE.equals("P")) {
-			path = bsePath + "/application/" + PACKAGE + VRC + "/p" + PACKAGE + MODULE + "/" + ROOT_FILE;
-		} else {
-			path = bsePath + "/application/" + PACKAGE + VRC + "/r" + PACKAGE + MODULE + "/" + ROOT_FILE;
-		}
+		System.out.println("Input file path: ");
+		String path = scanner.nextLine();
 		return path;
 	}
 
