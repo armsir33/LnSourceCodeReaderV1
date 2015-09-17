@@ -22,9 +22,9 @@ public class Main {
 	}
 	
 	private static void initAndSetupDBFolder() {
-		File path = new File(System.getProperty("user.home")+File.separator + "LnSourceCodeReader");
-		if(!path.exists()) {
-			path.mkdirs();
+		File pathFile = new File(System.getProperty("user.home")+File.separator + "LnSourceCodeReader");
+		if(!pathFile.exists()) {
+			pathFile.mkdirs();
 		}
 	}
 	
@@ -32,10 +32,10 @@ public class Main {
 		boolean quit = false;
 		String isExist;
 		while (true) {
-			String convertedPath = inputVariable();
-			File file = new File(convertedPath);
+			inputVariable();
+			File file = new File(path);
 			if (!file.exists()) {
-				System.out.println("The path " + convertedPath + " does not exist.");
+				System.out.println("The path " + path + " does not exist.");
 				do {
 					System.out.println("Exist(0) or Re-input(1)");
 					isExist = scanner.nextLine();
@@ -65,7 +65,6 @@ public class Main {
 			impl = fp.get(api);
 			// output
 			if(impl != null) {
-				System.out.println("function " + api);
 				System.out.println(impl);	
 			} else
 				System.out.println("NO function " + api + " found");
@@ -79,9 +78,9 @@ public class Main {
 			do {
 				System.out.println("Whether continue or not (YES or NO)");
 				isContinue = scanner.nextLine();
-			} while (!isContinue.equals("YES") && !isContinue.equals("NO"));
+			} while (!isContinue.equals("YES") && !isContinue.equals("Y") && !isContinue.equals("yes") && !isContinue.equals("y") && !isContinue.equals("NO") && !isContinue.equals("N") && !isContinue.equals("no") && !isContinue.equals("n"));
 
-			if (isContinue.equals("NO"))
+			if (isContinue.equals("NO") || isContinue.equals("N") || isContinue.equals("no") || isContinue.equals("n"))
 				break;
 		} while (true);
 	}
@@ -118,10 +117,9 @@ public class Main {
 //		return path;
 //	}
 	
-	private String inputVariable() {
+	private void inputVariable() {
 		System.out.println("Input file path: ");
-		String path = scanner.nextLine();
-		return path;
+		path = scanner.nextLine();
 	}
 
 	private void usage() {

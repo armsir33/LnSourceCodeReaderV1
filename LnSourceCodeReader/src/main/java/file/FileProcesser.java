@@ -26,8 +26,12 @@ public class FileProcesser {
 			while ((newLineStr = br.readLine()) != null) {
 				if (newLineStr.startsWith("function ")) {
 					isImpl = true;
-					int lastSpaceIndex = newLineStr.lastIndexOf(" ");
-					api = newLineStr.substring(lastSpaceIndex + 1, newLineStr.length() - 2);
+					int lastBraceIndex = newLineStr.lastIndexOf("(");
+					api = newLineStr.substring(0, lastBraceIndex);
+					int lastSpaceIndex = api.lastIndexOf(" ");
+					api = api.substring(lastSpaceIndex+1, lastBraceIndex);
+					
+					impSB.append(newLineStr + System.lineSeparator());
 				} else {
 					if (isImpl) {
 						// impl

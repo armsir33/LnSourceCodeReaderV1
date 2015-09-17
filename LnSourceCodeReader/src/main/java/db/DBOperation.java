@@ -50,8 +50,9 @@ public class DBOperation {
 
 	public String get(String key) {
 		APIEntity entry = em.find(APIEntity.class, key);
-		if(entry != null) 
+		if(entry != null) {
 			return new String(entry.getImpl());
+		}
 		else
 			return null;
 	}

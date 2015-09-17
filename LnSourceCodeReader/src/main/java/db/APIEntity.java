@@ -30,9 +30,7 @@ public class APIEntity {
 
 	@Override
 	public String toString() {
-		// return "function " + api + System.lineSeparator() + "{" +
-		// System.lineSeparator() + " " + impl + System.lineSeparator() + "}";
-
-		return "function " + api + System.lineSeparator() + new String(impl);
+//		return "function " + api + System.lineSeparator() + new String(impl);
+		return new String(impl);
 	}
 }
